@@ -60,11 +60,12 @@ class Program
                 save.SaveFile();
             }
 
-            else if (number == "5") //Clear a journal option. It allows the user to clear all the text of the journal files he loads.
+            else if (number == "5") //Clear a journal option. It allows the user to clear all the text of the journal files he created before.
             {
                 Console.WriteLine("Please type the file name: ");
                 string filename = Console.ReadLine();
                 File.WriteAllText(filename, String.Empty);
+                
             }
 
             else if (number == "6")
