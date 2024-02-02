@@ -7,4 +7,6 @@ public class BreathingActivity : Activity
     public BreathingActivity(int duration) : base(duration) {
         
     }
+
+    
 }

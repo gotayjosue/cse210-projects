@@ -1,6 +1,11 @@
 using System;
 using System.Formats.Asn1;
 using System.Globalization;
+using System.Runtime.InteropServices;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+
+
 
 class Program
 {
@@ -11,8 +16,8 @@ class Program
         List<string> options = new List<string>{"1. Start breathing activity","2. Start reflecting activity","3. Start listing activity","4. Quit"};
 
         List<string> breath = new List<string>{};
-        breath.Add("Breathe in...");
-        breath.Add("Now breathe out...");
+        breath.Add("Breathe in");
+        breath.Add("Now breathe out");
 
 
 
@@ -45,18 +50,26 @@ class Program
                 DateTime startTime = DateTime.Now;
                 DateTime endTime = startTime.AddSeconds(breathingActivity2.GetDuration());
 
-                Console.WriteLine("Get ready...");
+                Console.WriteLine("Get ready");
+                Dots();
                 Console.WriteLine(" ");
-                Thread.Sleep(3000);
+                Console.WriteLine(" ");
+
 
                 while (DateTime.Now < endTime) {
                     
-                    Console.WriteLine($"{breath[0]}");
-                    Thread.Sleep(4000);
-                    Console.WriteLine($"{breath[1]}");
-                    Thread.Sleep(4000);
-                    Console.WriteLine(" ");     
+                    Console.Write($"{breath[0]}");
+                    Dots();
+                    Console.WriteLine(" ");
+                    Console.Write($"{breath[1]}");
+                    Dots();
+                    Console.WriteLine(" ");
+                    Console.WriteLine(" ");
+                    {
+                        
+                    }     
                 }
+                Console.WriteLine(" ");
 
                 Console.WriteLine(breathingActivity.GetEndingMessage());
                 Console.WriteLine(" ");
@@ -82,9 +95,11 @@ class Program
                 DateTime startTime = DateTime.Now;
                 DateTime endTime = startTime.AddSeconds(reflectionActivity2.GetDuration());
 
-                Console.WriteLine("Get ready...");
+                Console.WriteLine("Get ready");
+                Dots();
                 Console.WriteLine(" ");
-                Thread.Sleep(3000);
+                Console.WriteLine(" ");
+
 
                 Console.WriteLine("Consider the following prompt");
                 Console.WriteLine(" ");
@@ -99,8 +114,8 @@ class Program
                 Console.WriteLine(" ");
                 Console.WriteLine("Now ponder on each of the following questions as they related to this experience");
                 Console.WriteLine("You may begin in: ");
+                Dots();
                 Console.WriteLine(" ");
-                Thread.Sleep(3000);
 
                 
 
@@ -109,8 +124,8 @@ class Program
                     var random2 = new Random();
                     int index2 = random2.Next(reflectionQuestions.Count);
                     
-                    Console.WriteLine($"--{reflectionQuestions[index2]}");
-                    Thread.Sleep(5000);
+                    Console.Write($"-- {reflectionQuestions[index2]}");
+                    Dots();
             
                 }
                 Console.WriteLine("");
@@ -141,18 +156,22 @@ class Program
                 DateTime startTime = DateTime.Now;
                 DateTime endTime = startTime.AddSeconds(listingActivity2.GetDuration());
 
-                Console.WriteLine("Get ready...");
+                Console.WriteLine("Get ready");
+                Dots();
                 Console.WriteLine(" ");
-                Thread.Sleep(3000);
+                Console.WriteLine(" ");
 
                 Console.WriteLine("Write as many answers you can to the following prompt:");
                 var listing = listingActivity.listingQuestions;
                 var random2 = new Random();
                 int index2 = random2.Next(listing.Count);
-                Console.WriteLine($"--{listing[index2]}");
+                Console.WriteLine($"-- {listing[index2]}");
                 Console.WriteLine("You may begin in: ");
+                // Console.WriteLine(" ");
+                // Thread.Sleep(3000);
+                Dots();
                 Console.WriteLine(" ");
-                Thread.Sleep(3000);
+                Console.WriteLine(" ");
 
                 List<string> prompts = new List<string>{};
 
@@ -173,16 +192,14 @@ class Program
 
             }
         }
-    
+
         static void Dots() {
             for (int i = 4; i > 0; i--) {
                 Console.Write(".");
-                Thread.Sleep(1000);
-                Console.Write("\b \b");
+                Thread.Sleep(4000);
+                Console.Write(" ");
             }
         }
-
-
 
     }
 }
