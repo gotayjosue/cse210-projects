@@ -31,5 +31,12 @@ public class Activity
         return _duration;
     }
 
+    public void Dots(int sec) {
+            for (int i = sec; i > 0; i--) {
+                Console.Write(".");
+                Thread.Sleep(1000);
+                Console.Write(" ");
+            }
+        }
 
 }

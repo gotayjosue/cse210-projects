@@ -3,7 +3,6 @@ using System.Formats.Asn1;
 using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 
 
 
@@ -11,16 +10,13 @@ class Program
 {
     static void Main(string[] args)
     {
-        
+    
 
         List<string> options = new List<string>{"1. Start breathing activity","2. Start reflecting activity","3. Start listing activity","4. Quit"};
 
         List<string> breath = new List<string>{};
         breath.Add("Breathe in");
         breath.Add("Now breathe out");
-
-
-
 
         string answer = "0";
 
@@ -51,7 +47,7 @@ class Program
                 DateTime endTime = startTime.AddSeconds(breathingActivity2.GetDuration());
 
                 Console.WriteLine("Get ready");
-                Dots();
+                breathingActivity.Dots(4);
                 Console.WriteLine(" ");
                 Console.WriteLine(" ");
 
@@ -59,10 +55,10 @@ class Program
                 while (DateTime.Now < endTime) {
                     
                     Console.Write($"{breath[0]}");
-                    Dots();
+                    breathingActivity.Dots(4);
                     Console.WriteLine(" ");
                     Console.Write($"{breath[1]}");
-                    Dots();
+                    breathingActivity.Dots(4);
                     Console.WriteLine(" ");
                     Console.WriteLine(" ");
                     {
@@ -96,7 +92,7 @@ class Program
                 DateTime endTime = startTime.AddSeconds(reflectionActivity2.GetDuration());
 
                 Console.WriteLine("Get ready");
-                Dots();
+                reflectionActivity.Dots(4);
                 Console.WriteLine(" ");
                 Console.WriteLine(" ");
 
@@ -114,7 +110,7 @@ class Program
                 Console.WriteLine(" ");
                 Console.WriteLine("Now ponder on each of the following questions as they related to this experience");
                 Console.WriteLine("You may begin in: ");
-                Dots();
+                reflectionActivity.Dots(4);
                 Console.WriteLine(" ");
 
                 
@@ -125,7 +121,8 @@ class Program
                     int index2 = random2.Next(reflectionQuestions.Count);
                     
                     Console.Write($"-- {reflectionQuestions[index2]}");
-                    Dots();
+                    reflectionActivity.Dots(5);
+                    Console.WriteLine(" ");
             
                 }
                 Console.WriteLine("");
@@ -157,7 +154,7 @@ class Program
                 DateTime endTime = startTime.AddSeconds(listingActivity2.GetDuration());
 
                 Console.WriteLine("Get ready");
-                Dots();
+                listingActivity.Dots(4);
                 Console.WriteLine(" ");
                 Console.WriteLine(" ");
 
@@ -169,7 +166,7 @@ class Program
                 Console.WriteLine("You may begin in: ");
                 // Console.WriteLine(" ");
                 // Thread.Sleep(3000);
-                Dots();
+                listingActivity.Dots(8);
                 Console.WriteLine(" ");
                 Console.WriteLine(" ");
 
@@ -193,13 +190,7 @@ class Program
             }
         }
 
-        static void Dots() {
-            for (int i = 4; i > 0; i--) {
-                Console.Write(".");
-                Thread.Sleep(4000);
-                Console.Write(" ");
-            }
-        }
+        
 
     }
 }
