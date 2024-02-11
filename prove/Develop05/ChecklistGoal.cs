@@ -1,3 +1,5 @@
+using System.Resources;
+
 public class ChecklistGoal : Goal 
 {
     private int _bonus = 0;
@@ -34,6 +36,7 @@ public class ChecklistGoal : Goal
 
     public void SetAmountCompleted(int amountCompleted) {
 
-        _amountCompleted += amountCompleted;
+        _amountCompleted = amountCompleted;
+
     }
 }
