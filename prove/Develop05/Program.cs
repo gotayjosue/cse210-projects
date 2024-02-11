@@ -55,7 +55,7 @@ class Program
 
                     using(StreamWriter sw = File.AppendText(goal._fileName))
                     {
-                        sw.WriteLine($"[] {simpleGoal.GetShortName()} ({simpleGoal.GetDescription()}) {simpleGoal.GetPoints()}");
+                        sw.WriteLine($"[] {simpleGoal.GetShortName()} ({simpleGoal.GetDescription()})");
                     }
 
                     using(StreamWriter sw = File.AppendText(goal._dataFile))
@@ -81,7 +81,7 @@ class Program
                     using(StreamWriter sw = File.AppendText(goal._fileName))
                     {
                         
-                        sw.WriteLine($"[] {eternalGoal.GetShortName()} ({eternalGoal.GetDescription()}) {eternalGoal.GetPoints()}");
+                        sw.WriteLine($"[] {eternalGoal.GetShortName()} ({eternalGoal.GetDescription()})");
                     }
                     
                     using(StreamWriter sw = File.AppendText(goal._dataFile))
@@ -109,11 +109,12 @@ class Program
                     string bonus = Console.ReadLine();
                     int bonusInt = int.Parse(bonus);
                     checklistGoal.SetBonus(bonusInt);
+                    
 
                     using(StreamWriter sw = File.AppendText(goal._fileName))
                     {
                         
-                        sw.WriteLine($"[] {checklistGoal.GetShortName()} ({checklistGoal.GetDescription()}) {checklistGoal.GetPoints()} -- Currently completed: {checklistGoal.GetAmountCompleted()}/{checklistGoal.GetTarget()}");
+                        sw.WriteLine($"[] {checklistGoal.GetShortName()} ({checklistGoal.GetDescription()}) -- Currently completed: {checklistGoal.GetAmountCompleted()}/{checklistGoal.GetTarget()}");
                     }
 
                     using(StreamWriter sw = File.AppendText(goal._dataFile))
@@ -201,12 +202,6 @@ class Program
                     
                 }
 
-                Console.WriteLine($"You earned {points} points");
-                    
-                    
-
-                goal.SetPoints(pointsInt);
-
 
                 if (strings[0].Contains("Checklist")) {
                     
@@ -217,6 +212,16 @@ class Program
                     int amountInt = int.Parse(amount);
 
                     checklistGoal.SetAmountCompleted(1);
+
+                    int oldAmount = checklistGoal.GetAmountCompleted() - 1;
+                    string strOldAmount = oldAmount.ToString();
+
+                    int newAmount = checklistGoal.GetAmountCompleted();
+                    string strNewAmount = newAmount.ToString();
+
+                    string[] timesCompleted = File.ReadAllLines(goal._fileName);
+                    timesCompleted[ansInt - 1] = timesCompleted[ansInt - 1].Replace(strOldAmount, strNewAmount);
+                    File.WriteAllLines(goal._fileName, timesCompleted);
 
                     if (checklistGoal.GetAmountCompleted() == amountInt) {
                         
@@ -230,6 +235,9 @@ class Program
                     }
                 }
 
+                Console.WriteLine($"You earned {points} points");
+                    
+                goal.SetPoints(pointsInt);
                 
                 
             }
