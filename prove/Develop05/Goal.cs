@@ -2,7 +2,6 @@ public class Goal
 {
     private string _fileName = "main.txt";
     private string _dataFile = "main2.txt";
-
     private string _scoreFile = "score.txt";
 
     private string _shortName = "";
@@ -55,5 +54,9 @@ public class Goal
     public void SetPoints(int points) {
 
         _points += points;
+    }
+
+    public virtual void DisplayInfo() {
+
     }
 }

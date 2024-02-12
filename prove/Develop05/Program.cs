@@ -17,6 +17,7 @@ class Program
 
         while (number  != "6")
         {
+            /* Write the current score to the score file */
             File.WriteAllText(goal.GetScoreFile(), String.Empty);
 
             using(StreamWriter sw = File.AppendText(goal.GetScoreFile()))
@@ -49,16 +50,8 @@ class Program
                 answer = Console.ReadLine();
 
                 if (answer == "1") {
-                    Console.WriteLine("What is the name of your goal? ");
-                    string name = Console.ReadLine();
-                    simpleGoal.SetShortName(name);
-                    Console.WriteLine("What is a short description of it?");
-                    string description = Console.ReadLine();
-                    simpleGoal.SetDescription(description);
-                    Console.WriteLine("What is the amount of points associated with this goal?");;
-                    string points = Console.ReadLine();
-                    int pointInt = int.Parse(points);
-                    simpleGoal.SetPoints(pointInt);
+
+                    simpleGoal.DisplayInfo();
 
                     using(StreamWriter sw = File.AppendText(goal.GetFileName()))
                     {
@@ -74,16 +67,7 @@ class Program
 
                 if (answer == "2"){
 
-                    Console.WriteLine("What is the name of your goal? ");
-                    string name2 = Console.ReadLine();
-                    eternalGoal.SetShortName(name2);
-                    Console.WriteLine("What is a short description of it?");
-                    string description2 = Console.ReadLine();
-                    eternalGoal.SetDescription(description2);
-                    Console.WriteLine("What is the amount of points associated with this goal?");;
-                    string points2 = Console.ReadLine();
-                    int pointInt2 = int.Parse(points2);
-                    eternalGoal.SetPoints(pointInt2);
+                    eternalGoal.DisplayInfo();
 
                     using(StreamWriter sw = File.AppendText(goal.GetFileName()))
                     {
@@ -98,25 +82,8 @@ class Program
                 }
 
                 if (answer == "3") {
-                    checklistGoal.SetAmountCompleted(0);
-                    Console.WriteLine("What is the name of your goal? ");
-                    string name3 = Console.ReadLine();
-                    checklistGoal.SetShortName(name3);
-                    Console.WriteLine("What is a short description of it?");
-                    string description3 = Console.ReadLine();
-                    checklistGoal.SetDescription(description3);
-                    Console.WriteLine("What is the amount of points associated with this goal?");;
-                    string points3 = Console.ReadLine();
-                    int pointInt3 = int.Parse(points3);
-                    checklistGoal.SetPoints(pointInt3);
-                    Console.WriteLine("How many times does this goal need to be accomplish for a bonus?");
-                    string times = Console.ReadLine();
-                    int timesInt = int.Parse(times);
-                    checklistGoal.SetTarget(timesInt);
-                    Console.WriteLine("What is the bonus for accomplish in that many times?");
-                    string bonus = Console.ReadLine();
-                    int bonusInt = int.Parse(bonus);
-                    checklistGoal.SetBonus(bonusInt);
+
+                    checklistGoal.DisplayInfo();
                     
 
                     using(StreamWriter sw = File.AppendText(goal.GetFileName()))
@@ -149,6 +116,8 @@ class Program
                 string fileData = $"data{filename}";
                 string scoreFile = $"score{filename}";
 
+                /* Save the data that user is going to see */
+
                 string  copyTxt = File.ReadAllText(goal.GetFileName());
                 File.WriteAllText(filename, copyTxt);
 
@@ -178,7 +147,7 @@ class Program
                 string copyTxt3 = File.ReadAllText(scoreFile);
                 File.WriteAllText(goal.GetScoreFile(), copyTxt3);
 
-                /*Assign the score to the user */
+                /*Load the score to the user */
                 
                 string [] lines = File.ReadAllLines(goal.GetScoreFile());
                 string savedPoints = lines[0];
@@ -189,7 +158,8 @@ class Program
 
             else if (number == "5")
             {
-                
+                /* Iterate through the data file to show the goal description */
+
                 string[] lines = File.ReadAllLines(goal.GetDataFile());
                 
                 Console.WriteLine("The goals are: ");
@@ -205,17 +175,21 @@ class Program
                     Console.WriteLine($"{numIndex}. {goalName}");
                     numIndex += 1;
                 }
+                /*Selecting the line of the file where the goal is*/
                 string ans = Console.ReadLine();
                 int ansInt = int.Parse(ans);
                 Console.WriteLine(" ");
 
                 string lineSelected = lines[ansInt - 1];
 
+                /*Split the selected line by commas to find the points index */
+
                 string [] strings = lineSelected.Split(","); 
 
                 string points = strings[3];
                 int pointsInt = int.Parse(points);
 
+                /* Evaluating the goal type to mark it as completed */
 
                 if (lineSelected.Contains("Simple")) {
                     string[] fileContent = File.ReadAllLines(goal.GetFileName());
@@ -235,12 +209,6 @@ class Program
 
                     int currentCompleted = checklistGoal.GetAmountCompleted();
                     checklistGoal.SetAmountCompleted(currentCompleted + 1);
-
-                    int oldAmount = checklistGoal.GetAmountCompleted() - 1;
-                    string strOldAmount = oldAmount.ToString();
-
-                    int newAmount = checklistGoal.GetAmountCompleted();
-                    string strNewAmount = newAmount.ToString();
 
                     string[] timesCompleted = File.ReadAllLines(goal.GetFileName());
                     timesCompleted[ansInt - 1] = timesCompleted[ansInt - 1].Replace($" {currentCompleted}/", $" {checklistGoal.GetAmountCompleted()}/");
