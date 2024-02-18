@@ -1,9 +1,9 @@
 public class Products : Sale
 {
-    private string _productFile = "Products.txt";
+    private string _productsFile = "Products.txt";
 
     public string GetProducts() {
 
-        return _productFile;
+        return _productsFile;
     }
 }
