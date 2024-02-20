@@ -9,6 +9,8 @@ class Program
         Products products = new Products();
         Cart cart = new Cart();
         Closing closing = new Closing();
+        Add add = new Add();
+        Remove remove = new Remove();
 
 
         List<string> options = new List<string>{"1. Add to cart", "2. Remove from cart", "3. Show cart", "4. Generate Bill", "5. Sales cash closing", "6. Quit"};
@@ -49,7 +51,6 @@ class Program
                         string response = Console.ReadLine();
 
                         if (response == "yes"){
-                            Console.WriteLine(intPrice);
                             int currentSale = sale.GetTotal();
                             sale.SetTotal(currentSale + intPrice);
                             cart.products.Add(productName);
@@ -65,6 +66,7 @@ class Program
             }
 
             if (answer == "2"){ /*Remove from cart option */
+
 
                 Console.WriteLine("Please type the product number you want to remove from the cart");
                 Console.WriteLine(" ");
@@ -103,7 +105,7 @@ class Program
                 Console.WriteLine(" ");
             }
 
-            if (answer == "4"){
+            if (answer == "4"){ /*Bill Option */
 
                 Console.WriteLine(" ");
                 Console.Write("Num   ");
@@ -132,7 +134,7 @@ class Program
 
             }
 
-            if (answer == "5"){
+            if (answer == "5"){ /*Sales Closing Option */
                 Console.WriteLine(" ");
                 Console.WriteLine($"The total of this day is: ${closing.GetSalesCashClosing()}");
                 Console.WriteLine(" ");
