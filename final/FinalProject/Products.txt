@@ -1,5 +1,0 @@
-1,Coconut Oil,10
-2,Fried Chicken,12
-3,Lemonade,5
-4,Rise and beans,13
-5,Sandwich,7
