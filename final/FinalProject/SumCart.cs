@@ -1,6 +1,9 @@
 public class SumCart : Sale 
-{
-    public void SumCartObjects() {
-        
+{   
+    Sale sale = Sale.Instance;
+    public void SumCartObjects(int price) {
+
+        sale.AddToTotal(price);
+ 
     }
 }

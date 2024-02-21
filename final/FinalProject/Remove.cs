@@ -1,26 +1,25 @@
 public class Remove : Sale 
 {
-    Cart cart = new Cart();
-    Sale sale = new Sale();
-    Products products = new Products();
-        
+    SubstractCart substractCart = new SubstractCart();
+    Cart cart = Cart.Instance;
+    Sale sale = Sale.Instance;
     public override void RenderCart() {
         Console.WriteLine("Please type the product number you want to remove from the cart");
         Console.WriteLine(" ");
 
         int numIndex = 1;
-        foreach (var (x, y) in cart.products.Zip(cart.prices)){
+        foreach (var (x, y) in cart.GetProductsList().Zip(cart.GetPricesList())){
             Console.WriteLine($"{numIndex}. {x} ${y}");
 
             numIndex += 1;
         }
         string removedProduct = Console.ReadLine();
         int removedInt = int.Parse(removedProduct);
-        cart.products.RemoveAt(removedInt - 1);
-        int newTotal = cart.prices.ElementAt(removedInt - 1);
+        cart.GetProductsList().RemoveAt(removedInt - 1);
+        int newTotal = cart.GetPricesList().ElementAt(removedInt - 1);
         int currentSale = sale.GetTotal();
-        sale.SetTotal(currentSale - newTotal);
-        cart.prices.RemoveAt(removedInt -1);
+        substractCart.SubstractCartObjects(currentSale, newTotal);
+        cart.GetPricesList().RemoveAt(removedInt -1);
         Console.WriteLine(" ");
         Console.WriteLine("The product has been removed");
     }

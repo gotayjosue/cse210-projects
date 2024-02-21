@@ -1,6 +1,9 @@
 public class SubstractCart : Sale 
 {
-    public void SubstractCartObjects() {
+    Sale sale = Sale.Instance;
+    public void SubstractCartObjects(int currentSale, int newTotal) {
         
+        sale.SetTotal(currentSale - newTotal);
+
     }
 }
